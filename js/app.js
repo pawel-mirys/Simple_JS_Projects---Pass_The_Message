@@ -1,28 +1,23 @@
+const form = document.querySelector('#message-form');
+const msgInput = document.querySelector('#message');
+const msgBox = document.querySelector('.message-content');
+const errorMsg = document.querySelector('#errorMsg');
 
-(function() {
-//Select the input element
-const form = document.querySelector('#message-form')
-//Set up Submit Button
-form.addEventListener('submit', function(e){
-    // prevent the form's default submission action
-    e.preventDefault()
-    //Get user's input from from
-    const message = document.querySelector('#message')
-    const feedback = document.querySelector('.feedback')
-    const messageContent = document.querySelector('.message-content')
-
-    if (message.value === ''){
-        feedback.classList.add('show')
-        setTimeout(function(){
-        feedback.classList.remove('show')
-        }, 2000)
+const takeMsg = () => {
+    let msg = '';
+    if (msgInput.value === '') {
+        errorMsg.classList.add('show');
+        msgBox.innerText = 'HELLO WORLD';
+        setTimeout(() => errorMsg.classList.remove('show'), 3000);
     } else {
-        //Change message content and clear the message input
-        messageContent.textContent = message.value
-        message.value = ''
+        msg = msgInput.value;
+        msgBox.innerText = msg;
     }
+    msgInput.value = ''
+}
+
+
+form.addEventListener('submit', e => {
+    e.preventDefault()
+    takeMsg()
 })
-})()
-
-
-
